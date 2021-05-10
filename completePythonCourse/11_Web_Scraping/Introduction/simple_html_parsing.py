@@ -27,20 +27,25 @@ def find_list_items():  # Função que encontra os itens de uma lista (li)
     list_content = [e.string for e in list_items]
     print(list_content)
 
+# Funçãoo que encontra o parágrafo (p) com o argumento class=subtitle
 
-def find_paragraph():  # Funçãoo que encontra o parágrafo (p) com o argumento class=subtitle
+
+def find_paragraph():
     print(simple_soup.find('p', {'class': 'subtitle'}).string)
 
+# Função que encontra parágrafos que NÃO contenha class=subtitle
 
-def find_other_paragraph():  # Função que encontra parágrafos que NÃO contenha class=subtitle
+
+def find_other_paragraph():
     paragraphs = simple_soup.find_all('p')
     other_paragraph = [
         p for p in paragraphs if 'subtitle' not in p.attrs.get('class', [])]
     print(other_paragraph[0].string)
 
-# OBS.: A função get() retorna um NONE quando não encontra nada. Porém um NONE não é iterável
-# ... causando erro no FOR
-# Para que o get() retorne algo que seja iterável, faz-se get(agr1, obj_iterável).
+# OBS.: A função get() retorna um NONE quando não encontra nada...
+# ... Porém um NONE não é iterável causando erro no FOR
+# Para que o get() retorne algo que seja iterável, faz-se ...
+# ... get(agr1, obj_iterável).
 # No caso acima, usa-se uma lista vazia
 
 
