@@ -1,4 +1,4 @@
-from app import db
+from app import db, lm
 
 # db.Model --> Classe do SQLalchemy que faz um modelo de tabela padrão
 
@@ -20,6 +20,25 @@ class User(db.Model):
 
     def __repr__(self) -> str:
         return f'<User {self.username}>'
+
+    @lm.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+
+    @property
+    def is_authenticated(self):
+        return True
+
+    @property
+    def is_active(self):
+        return True
+
+    @property
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return str(self.id)
 
 
 class Post(db.Model):

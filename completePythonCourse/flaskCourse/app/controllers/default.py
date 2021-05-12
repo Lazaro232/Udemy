@@ -1,26 +1,42 @@
+from flask import render_template, flash, redirect, url_for
+from flask_login import login_manager
+from flask_login.utils import login_user, logout_user
+
 from app.models.tables import User
-from flask import render_template
+
 from app import app, db
 
 # from app.models.tables import User
 from app.models.forms import LoginForm
 
 
-@app.route('/index/<user>')
+@app.route('/index/<user>')  # Página Inicial
 @app.route('/', defaults={"user": None})
 def index(user):
     return render_template('index.html',
                            user=user)  # Recebe HTML e renderiza
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])  # Página de Login
 def login():
     form = LoginForm()
     if form.validate_on_submit():  # Verificando se o From foi validado
-        print(form.username.data)
-        print(form.password.data)
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.password == form.password.data:
+            login_user(user)
+            flash("Logged in.")
+            return redirect(url_for('index'))
+        else:
+            flash("Invalid Login.")
 
     return render_template('login.html', form=form)
+
+
+@app.route('/logout')  # Página de Logout
+def logout():
+    logout_user()
+    flash("Logged out.")
+    return redirect(url_for('index'))
 
 
 '''
