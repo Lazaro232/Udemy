@@ -2,7 +2,6 @@ import sqlite3
 
 
 def create_investment_table():
-    print('ENTREI NO CREATE')
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()
     cursor.execute(
@@ -14,7 +13,6 @@ def create_investment_table():
 
 
 def add_investment(ativo, numero_cotas, valor_cota, data):
-    print('ENTREI NO ADD')
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()
     cursor.execute(
@@ -26,7 +24,6 @@ def add_investment(ativo, numero_cotas, valor_cota, data):
 
 
 def get_all_investments():
-    print('ENTREI NO GET')
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM investments')
@@ -38,3 +35,11 @@ def get_all_investments():
                     'data': row[4]} for row in cursor.fetchall()]
     connection.close()
     return investments
+
+
+def delete_investment(id):
+    connection = sqlite3.connect('data.db')
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM investments WHERE id = ?', (id,))
+    connection.commit()
+    connection.close()
