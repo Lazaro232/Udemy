@@ -1,5 +1,9 @@
 from utils import database
 
+'''
+Arquivo que contém funções de prompt e organização
+'''
+
 
 def prompt_add_investment():
     ativo = input('Nome do ativo: ').upper()
@@ -37,40 +41,6 @@ def organize_by_value_invested():
         print(
             f"{invest['ativo']} possui R$ {str(invest['valor_investido']).replace('.', ',')} investidos e representa {round(invest['valor_investido']/total_invested*100, 2) }% da carteira de ações")
 
-
-USER_CHOICE = """
-Enter:
-- 'a' to add a new investment
-- 'l' to list all investments
-- 'o' to order the investments by value invested
-- 'd' to delete a investment
-- 'q' to quit
-
-Your choice: """
-
-user_option = {
-    "a": prompt_add_investment,       # Add
-    "l": list_all_investments,        # List
-    "o": organize_by_value_invested,  # Order
-    "d": prompt_delete_investment     # Delete
-}
-
-
-def menu():
-    database.create_investment_table()
-    user_input = input(USER_CHOICE)
-    while user_input != 'q':
-        if user_input in user_option:
-            selected_function = user_option[user_input]
-            selected_function()
-        else:
-            print('Unknown command. Please try again!')
-        user_input = input(USER_CHOICE)
-
-
-# FALTA ADICIONAR O UPDATE (MODIFICAR UM INVESTIMENTO JÁ ADICIONADO !!!!!!)
-menu()
-# FALTA ADICIONAR O UPDATE (MODIFICAR UM INVESTIMENTO JÁ ADICIONADO !!!!!!)
 
 '''
 ANOTAÇÕES SOBRE COMO TRABALHAR COM TEMPO
