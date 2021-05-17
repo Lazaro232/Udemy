@@ -1,4 +1,5 @@
 from utils import database
+from utils.excel import Excel
 
 '''
 Arquivo que contém funções de prompt e organização
@@ -40,6 +41,14 @@ def organize_by_value_invested():
     for invest in name_value_dict:
         print(
             f"{invest['ativo']} possui R$ {str(invest['valor_investido']).replace('.', ',')} investidos e representa {round(invest['valor_investido']/total_invested*100, 2) }% da carteira de ações")
+
+
+def create_excel_file():
+    # Excel.style_variables()
+    excel = Excel()
+    excel.creating_excel_file()
+    excel.headers_style()
+    excel.save_file()
 
 
 '''

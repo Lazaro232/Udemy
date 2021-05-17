@@ -1,4 +1,4 @@
-from utils import app, excel
+from utils import app
 
 '''
 Arquivo que contém o menu interativo com o usuário
@@ -21,7 +21,7 @@ user_option = {
     "l": app.list_all_investments,        # List
     "o": app.organize_by_value_invested,  # Order
     "d": app.prompt_delete_investment,    # Delete
-    "e": excel.create_excel_file,         # Excel
+    "e": app.create_excel_file,         # Excel
 }
 
 
