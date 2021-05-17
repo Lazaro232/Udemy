@@ -41,6 +41,16 @@ def get_all_investments():
     return investments
 
 
+def update_investment(id, ativo, numero_cotas, valor_cota, data):
+    connection = sqlite3.connect('data.db')
+    cursor = connection.cursor()
+    cursor.execute(
+        '''UPDATE investments SET ativo=?, numero_cotas=?, valor_cota=?, data=? WHERE id=?''',
+        (ativo, numero_cotas, valor_cota, data, id))
+    connection.commit()
+    connection.close()
+
+
 def delete_investment(id):
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()

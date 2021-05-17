@@ -25,6 +25,15 @@ def prompt_delete_investment():
     database.delete_investment(id)
 
 
+def prompt_update_investment():
+    id = input('ID do investimento que deseja modificar: ')
+    ativo = input('Nome do ativo: ').upper()
+    numero_cotas = int(input('Número de cotas compradas: '))
+    valor_cota = float(input('Valor pago por cota: '))
+    data = input('Data da compra (DIA-MÊS-ANO): ')
+    database.update_investment(id, ativo, numero_cotas, valor_cota, data)
+
+
 def organize_by_value_invested():
     investments = database.get_all_investments()
     # Dictonary with name and value invested with 2 decimal places
@@ -44,11 +53,10 @@ def organize_by_value_invested():
 
 
 def create_excel_file():
-    # Excel.style_variables()
     excel = Excel()
-    excel.creating_excel_file()
-    excel.headers_style()
-    excel.save_file()
+    excel.creating_excel_file()  # Cria o arquivo
+    excel.headers_style()  # Estiliza as células
+    excel.save_file()  # Salva o arquivo
 
 
 '''

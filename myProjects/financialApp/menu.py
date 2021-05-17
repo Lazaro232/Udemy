@@ -21,7 +21,8 @@ user_option = {
     "l": app.list_all_investments,        # List
     "o": app.organize_by_value_invested,  # Order
     "d": app.prompt_delete_investment,    # Delete
-    "e": app.create_excel_file,         # Excel
+    "u": app.prompt_update_investment,    # Update
+    "e": app.create_excel_file,           # Excel
 }
 
 
@@ -37,6 +38,4 @@ def menu():
         user_input = input(USER_CHOICE)
 
 
-# FALTA ADICIONAR O UPDATE (MODIFICAR UM INVESTIMENTO JÁ ADICIONADO !!!!!!)
 menu()
-# FALTA ADICIONAR O UPDATE (MODIFICAR UM INVESTIMENTO JÁ ADICIONADO !!!!!!)
