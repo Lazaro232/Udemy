@@ -1,4 +1,4 @@
-from utils import app
+from utils import app, excel
 
 '''
 Arquivo que contém o menu interativo com o usuário
@@ -9,7 +9,9 @@ Enter:
 - 'a' to add a new investment
 - 'l' to list all investments
 - 'o' to order the investments by value invested
-- 'd' to delete a investment
+- 'd' to delete an investment
+- 'u' to update an investiment
+- 'e' to create an excel file
 - 'q' to quit
 
 Your choice: """
@@ -18,7 +20,8 @@ user_option = {
     "a": app.prompt_add_investment,       # Add
     "l": app.list_all_investments,        # List
     "o": app.organize_by_value_invested,  # Order
-    "d": app.prompt_delete_investment     # Delete
+    "d": app.prompt_delete_investment,    # Delete
+    "e": excel.create_excel_file,         # Excel
 }
 
 
