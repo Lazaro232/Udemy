@@ -14,10 +14,12 @@ class OpenMarket:
     @cached(cache=TTLCache(maxsize=2, ttl=900))
     def meal(self):
         endpoint = f"{self.BASE_URL}/T7_MEAL_OMELETTE%402.json"
-        return requests.get(endpoint).json()  # Dicionário
+        return requests.get(endpoint).json()  # json --> Dicionário
 
     def printPrices(self):
+        # Recuperando dados da API
         city_dict = self.meal()
+        # Printando cidades selecionadas em CITY_OPTIONS
         for city_data in city_dict:
             city = city_data['city']
             price = city_data['sell_price_min']
