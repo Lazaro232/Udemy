@@ -3,3 +3,18 @@
 2) Criar uma função que informe acerca de possível OUTLIER
 
 3) Criar funções com funções semelhantes as da planilha do Excel
+
+
+
+######## SITES IMPORTANTES #########
+
+Como o servidor Responde (DESCOBRIR ENDPOINT):
+https://www.albion-online-data.com/api/swagger/index.html
+
+Nomes dos itens:
+https://github.com/broderickhyman/ao-bin-dumps/blob/master/formatted/items.txt
+
+Site do Albion Online Data Project:
+https://www.albion-online-data.com/
+
+OBS.: Encontra o nome do item, joga no primeiro site citado acima e descobre o ENDPOINT do item
