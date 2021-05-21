@@ -41,7 +41,7 @@ def update_user(id, name, password, email, logo):
     connection = sqlite3.connect('data.db')
     cursor = connection.cursor()
     cursor.execute(
-        '''UPDATE investments SET name=?, password=?, email=?, logo=? WHERE id=?''',
+        '''UPDATE users SET name=?, password=?, email=?, logo=? WHERE id=?''',
         (name, password, email, logo, id))
     connection.commit()
     connection.close()
