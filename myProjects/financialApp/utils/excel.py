@@ -1,7 +1,8 @@
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles.borders import Border
 from openpyxl.utils import get_column_letter
-from openpyxl.styles import Alignment, Font, PatternFill, Side
+from openpyxl.styles import Alignment, Font, PatternFill, Side, Protection
+from openpyxl.drawing.image import Image
 
 from utils import database
 
@@ -14,6 +15,19 @@ class Excel:
         self.wb = Workbook()
         self.ws = self.wb.active
         self.ws.title = "Investimentos_Realizados"
+        # Bloqueando a ABA e estabelecendo uma senha
+        self.ws.protection.sheet = True
+        self.ws.protection.password = '123'
+
+        # Inserindo Imagem
+        img = Image('image.jpg')
+        img.anchor = 'J1'
+        self.ws.add_image(img)
+
+        # row_number = 1
+        # col_idx = 10
+        # cell = self.ws.cell('J1')
+        # self.ws.add_image(img)
 
     def style_variables(self, row=0):
         # Cabeçalho Principal
@@ -38,6 +52,8 @@ class Excel:
         # Cabeçalho Geral
         self.ws.merge_cells('A1:F1')
         self.ws['A1'].value = 'Compras de Ativos'
+        # Desbloqueia uma célula específica
+        self.ws['A1'].protection = Protection(locked=False)
 
         # Cabeçalho secundário
         header = ['ATIVO', 'Nº COTAS', 'VALOR/COTA', 'TOTAL', 'DATA']
@@ -91,4 +107,4 @@ class Excel:
 
     def save_file(self):
         self.wb.save(
-            "/mnt/c/wsl/pythonRoadMap/myProjects/financialApp/Investimentos.xlsx")
+            "/mnt/c/wsl/pythonRoadMap/myProjects/financialApp/Investimentos_Teste.xlsx")
