@@ -21,6 +21,8 @@ class ExcelCreator():
         self.work_sheet['B1'].value = 'Senha'
         self.work_sheet['C1'].value = 'e-mail'
         self.work_sheet['D1'].value = 'URL Logo'
+        # Desbloqueando a célula A1
+        self.work_sheet['A1'].protection = Protection(locked=False)
 
         # Adicionando dados do banco de dados no Excel
         users = database.get_all_users()
@@ -35,6 +37,11 @@ class ExcelCreator():
         for col in range(1, 5):
             self.work_sheet.column_dimensions[get_column_letter(
                 col)].width = 30
+
+    def inserting_image(self):
+        img = Image('image.jpg')
+        img.anchor = 'E1'
+        self.work_sheet.add_image(img)
 
     def save_excel_file(self):  # Salva o arquivo
         self.work_book.save(

@@ -38,6 +38,7 @@ def prompt_delete_user():
 # list_all_users()
 
 
-excel = ExcelCreator()
-excel.update_excel_file()
-excel.save_excel_file()
+excel = ExcelCreator()  # Instanciando objeto
+excel.update_excel_file()  # Adicionando dados no excel
+excel.inserting_image()  # Adicionando imagem no excel
+excel.save_excel_file()  # Salvando arquivo Excel
