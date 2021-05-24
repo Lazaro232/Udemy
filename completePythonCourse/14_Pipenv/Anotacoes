@@ -1,0 +1,48 @@
+		*** 1. Como instalar ***
+
+1) pip3 install pipenv
+
+
+		*** 2. Help ***
+
+1) digita: pipenv
+  --> Aparecerá o Help com alguns comandos de exemplo para ajudar a compreender o pipenv
+
+
+		*** 3. Criando VENV ***
+
+1) pipenv install
+  --> Cria o ambiente virtual
+*  --> Cria uma pasta específica para o ambiente virtual
+
+2) pipenv install -r requirements.txt
+  --> Cria o ambiente virtual com as bilbiotecas presentes em requirements.txt
+
+
+		*** 4. Instalando Bibliotecas ***
+
+1) pipenv install request
+2) pipenv install openpyxl
+
+		*** 5. Ativando e desativando o Ambiente virtual ***
+
+1) pipenv shell
+  --> Ativa o ambiente virtual (Funciona como um source VENV/bin/activate)
+
+2) deactivate
+  --> Desativa o ambiente virtaul
+
+
+		*** 6. Rodando Pytho dentro do Ambiente virtual - SEM PRECISAR ATIVAR O AMBIENTE ***
+
+1) pipenv run python3
+  --> Acessa o terminal python
+
+2) pipenv run python3 app.py
+  --> Roda o arquivo Python app.py usando o ambiente virtual criado acima, sem precisar ativar o ambiente
+
+
+		*** 7. AVISO !!! ***
+
+1) Caso se MOVA a pasta do projeto para outro local, o pipenv não reconhecerá mais o projeto
+   Neste caso é preciso recriar o ambiente virtual no novo diretório
