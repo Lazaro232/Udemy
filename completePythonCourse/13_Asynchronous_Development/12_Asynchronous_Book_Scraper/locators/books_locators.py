@@ -1,6 +1,5 @@
-# Estando dentro do livro (article.product_pod), encontra-se o locator que retorne
-# o preço do livro
-
 class BookLocators:
-    PRICE = 'div.product_price p.price_color'
-    TILTE = 'h3 a'
+    NAME_LOCATOR = 'article.product_pod h3 a'
+    LINK_LOCATOR = 'article.product_pod h3 a'
+    PRICE_LOCATOR = 'article.product_pod p.price_color'
+    RATING_LOCATOR = 'article.product_pod p.star-rating'
