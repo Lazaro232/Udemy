@@ -1,0 +1,26 @@
+01-06-2021 14:37:56 INFO     [ app.py:23] Loading books list...
+01-06-2021 14:37:56 DEBUG    [ connectionpool.py:971] Starting new HTTPS connection (1): books.toscrape.com:443
+01-06-2021 14:37:57 DEBUG    [ connectionpool.py:452] https://books.toscrape.com:443 "GET /catalogue/page-1.html HTTP/1.1" 200 None
+01-06-2021 14:37:57 DEBUG    [ all_books_page.py:13] Parsing page content with BeautifulSoup HTML parser.
+01-06-2021 14:37:57 DEBUG    [ selector_events.py:59] Using selector: EpollSelector
+01-06-2021 14:37:57 DEBUG    [ all_books_page.py:18] Finding all books in the page using `div.page_inner section li.col-xs-6`.
+01-06-2021 14:37:57 DEBUG    [ all_books_page.py:30] Finding all number of catalogue pages available...
+01-06-2021 14:37:57 INFO     [ all_books_page.py:33] Found number of catalogue available: `
+            
+                Page 1 of 50
+            
+            `.
+01-06-2021 14:37:57 DEBUG    [ all_books_page.py:37] Extracted number of pages as integer: `50`.
+01-06-2021 14:38:58 INFO     [ app.py:23] Loading books list...
+01-06-2021 14:38:58 DEBUG    [ connectionpool.py:971] Starting new HTTPS connection (1): books.toscrape.com:443
+01-06-2021 14:38:58 DEBUG    [ connectionpool.py:452] https://books.toscrape.com:443 "GET /catalogue/page-1.html HTTP/1.1" 200 None
+01-06-2021 14:38:58 DEBUG    [ all_books_page.py:13] Parsing page content with BeautifulSoup HTML parser.
+01-06-2021 14:38:58 DEBUG    [ selector_events.py:59] Using selector: EpollSelector
+01-06-2021 14:38:58 DEBUG    [ all_books_page.py:18] Finding all books in the page using `div.page_inner section li.col-xs-6`.
+01-06-2021 14:38:58 DEBUG    [ all_books_page.py:30] Finding all number of catalogue pages available...
+01-06-2021 14:38:58 INFO     [ all_books_page.py:33] Found number of catalogue available: `
+            
+                Page 1 of 50
+            
+            `.
+01-06-2021 14:38:58 DEBUG    [ all_books_page.py:37] Extracted number of pages as integer: `50`.

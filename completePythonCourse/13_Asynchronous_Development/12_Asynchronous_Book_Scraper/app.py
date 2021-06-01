@@ -1,5 +1,9 @@
-import requests
+import aiohttp
+import async_timeout
+import asyncio
+import time
 import logging
+import requests
 
 from pages.all_books_page import AllBooksPage
 
@@ -18,7 +22,6 @@ logger = logging.getLogger('scraping')
 
 logger.info('Loading books list...')
 
-
 # https://books.toscrape.com/catalogue/page-1.html
 
 
@@ -26,12 +29,38 @@ page_content = requests.get(
     'https://books.toscrape.com/catalogue/page-1.html').content
 page = AllBooksPage(page_content)
 
+loop = asyncio.get_event_loop()
+
 books = page.books
 
-for page_num in range(1, page.page_count):  # 1 até 49 (são 50 páginas)
-    # Página 2 até 50, pois a 1 já está baixada acima
-    url = f'https://books.toscrape.com/catalogue/page-{page_num+1}.html'
-    page_content = requests.get(url).content
+
+async def fetch_page(session, url):
+    page_start = time.time()
+    async with async_timeout.timeout(10):
+        async with session.get(url) as response:
+            print(f'Page took {time.time() - page_start}')
+            # Retorna o conteúdo HTML da página
+            return await response.text()
+
+
+async def get_multiple_pages(loop, *urls):
+    tasks = []
+    # Cria uma pool de sessões
+    async with aiohttp.ClientSession(loop=loop) as session:
+        for url in urls:
+            tasks.append(fetch_page(session, url))
+        # Roda todas as tarefas de uma vez usando o asyncio.gather
+        # Sem o asyncio.gather, teria de fazer um .run_until_complete para cada tarefa
+        grouped_tasks = asyncio.gather(*tasks)
+        return await grouped_tasks
+
+urls = ['https://books.toscrape.com/catalogue/page-{page_num+1}.html'
+        for page_num in range(1, page.page_count)]
+start = time.time()
+pages = loop.run_until_complete(get_multiple_pages(loop, *urls))
+print(f'Total page requests took {time.time() - start}')
+
+for page_content in pages:
     logger.debug('Creating AllBookspgae from page content.')
     page = AllBooksPage(page_content)
     books.extend(page.books)  # extend = append para vários elementos
