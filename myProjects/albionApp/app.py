@@ -29,5 +29,9 @@ item_value_70 = 504
 item_value_7123 = 1080
 
 
-def profit(how_much):
+def profit():
     (omelete, wheat, chicken, hen) = meal.omelette_t3()
+    print(omelete)
+
+
+profit()
