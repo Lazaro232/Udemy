@@ -1,6 +1,7 @@
 from libs.open_market import OpenMarket
 from utils.item_value import ItemValue
 from utils.recipes import Foods
+from utils.fees import Fees
 from math import floor
 
 
@@ -17,40 +18,12 @@ from math import floor
 
 # Exemplo: ENDPOINT = "https://www.albion-online-data.com/api/v2/stats/Prices/T7_MEAL_OMELETTE%402.json"
 
+# Formula para taxa de uso: Custo/Item = Taxa * 5 * Valor do item (valor fixo)
 
 meal = OpenMarket()
 
 
-FOODS = [{'food': 'omelette_T3',
-          'wheat': 4,
-          'chicken': 8,
-          'hen': 2},
-         {'food': 'omelette_T5',
-          'cabbage': 12,
-          'goose': 24,
-          'goose_eggs': 6},
-         {'food': 'omelette_T7',
-          'corn': 36,
-          'pork': 72,
-          'goose_eggs': 18},
-         ]
-
-
-MARKET_FEE = 0.045
-
-# Formula para taxa de uso: Custo/Item = Taxa * 5 * Valor do item (valor fixo)
-
-# Valor do omelete 3.0 = 56,2
-# Valor do omelete 5.0 = 168,1
-# Valor do omelete 7.0 = 504
-# Valor do ometele 7.1/7.2/7.3 = 1080
-item_value_30 = 56.2
-item_value_50 = 168.1
-item_value_70 = 504
-item_value_7123 = 1080
-
-
-def profit():
+def omelette_t3():
     # Albion informations
     (omelette, wheat, chicken, hen) = meal.omelette_t3()
     omelette_price = omelette[1]['price']
@@ -61,10 +34,10 @@ def profit():
     # User information
     amount_to_craft = float(input('Quantidade a ser fabricada: '))
     tax_fee = float(input('Taxa da loja a ser utilizada: '))/100
-    focus = int(input('1: With focus --- 0: Without focus '))
+    focus = int(input('1: Com foco --- 0: Sem foco '))
 
-    # Calculator
-    tax_to_craft = tax_fee * 5 * item_value_30
+    # Calculations
+    tax_to_craft = tax_fee * 5 * ItemValue.OMELETTE["T3"]
 
     if focus:
         return_rate = 0.453
@@ -72,14 +45,14 @@ def profit():
         return_rate = 0.152
 
     real_return_rate = 1 + return_rate + \
-        return_rate**2 + return_rate**3 + return_rate ** 4
+        return_rate**2 + return_rate**3 + return_rate**4
 
     amount_crafted = floor(amount_to_craft * real_return_rate / 10)*10
-    material_cost = amount_to_craft/10 * (wheat_price * FOODS[0]['wheat'] +
-                                          chicken_price * FOODS[0]['chicken'] +
-                                          hen_price * FOODS[0]['hen'])
+    material_cost = amount_to_craft/10 * (wheat_price * Foods.OMELETTE['T3']['wheat'] +
+                                          chicken_price * Foods.OMELETTE['T3']['chicken'] +
+                                          hen_price * Foods.OMELETTE['T3']['hen'])
     craft_cost = amount_crafted * tax_to_craft / 10
-    sell_cost = omelette_price * MARKET_FEE * amount_crafted
+    sell_cost = omelette_price * Fees.MARKET_FEE * amount_crafted
     total_cost = material_cost + craft_cost + sell_cost
 
     gross_profit = omelette_price * amount_crafted
@@ -92,5 +65,4 @@ def profit():
         return "Lucro de {:,} pratas".format(final_result).replace(',', '.')
 
 
-# profit()
-print(profit())
+print(omelette_t3())

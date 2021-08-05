@@ -28,19 +28,23 @@ class OpenMarket:
             if city in self.CITY_OPTIONS:
                 print(f"{city} is: {price: ,}".replace(',', '.'))
 
+    def organize_data(self, data):
+        list = [{"city": city['city'], "price": city['sell_price_min']}
+                for city in data if city['city'] in self.CITY_OPTIONS]
+        sorted_list = sorted(list, key=lambda x: x['city'])
+        return sorted_list
+
     def omelette_t3(self):
         # TIER 3 (Chicken Omelette)
         omellete_t3 = EndPoints.RESOURCES["omelette_t3"]
         sheaf_of_wheat = EndPoints.RESOURCES["sheaf_of_wheat"]
         raw_chicken = EndPoints.RESOURCES["raw_chicken"]
         hen_eggs = EndPoints.RESOURCES["hen_eggs"]
-
         # Retrieving the data
         omelette_t3_data = self.retrieve_data(omellete_t3)
         wheat_data = self.retrieve_data(sheaf_of_wheat)
         chicken_data = self.retrieve_data(raw_chicken)
         hen_data = self.retrieve_data(hen_eggs)
-
         # Organazing the data
         omellete_t3_prices = self.organize_data(omelette_t3_data)
         wheat_prices = self.organize_data(wheat_data)
@@ -49,11 +53,43 @@ class OpenMarket:
 
         return omellete_t3_prices, wheat_prices, chicken_prices, hen_prices
 
-    def organize_data(self, data):
-        list = [{"city": city['city'], "price": city['sell_price_min']}
-                for city in data if city['city'] in self.CITY_OPTIONS]
-        sorted_list = sorted(list, key=lambda x: x['city'])
-        return sorted_list
+    def omelette_t5(self):
+        # TIER 5 (Goose Omelette)
+        omelette_t5 = EndPoints.RESOURCES["omelette_t5"]
+        cabbage = EndPoints.RESOURCES["cabbage"]
+        raw_goose = EndPoints.RESOURCES["raw_goose"]
+        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
+        # Retrieving the data
+        omelette_t5_data = self.retrieve_data(omelette_t5)
+        cabbage_data = self.retrieve_data(cabbage)
+        goose_data = self.retrieve_data(raw_goose)
+        goose_eggs_data = self.retrieve_data(goose_eggs)
+        # Organazing the data
+        omellete_t5_prices = self.organize_data(omelette_t5_data)
+        cabbage_prices = self.organize_data(cabbage_data)
+        goose_prices = self.organize_data(goose_data)
+        goose_eggs_prices = self.organize_data(goose_eggs_data)
+
+        return omellete_t5_prices, cabbage_prices, goose_prices, goose_eggs_prices
+
+    def omelette_t7(self):
+        # TIER 7 (Pork Omelette)
+        omelette_t7 = EndPoints.RESOURCES["omelette_t7"]
+        corn = EndPoints.RESOURCES["bundle_of_corn"]
+        raw_pork = EndPoints.RESOURCES["raw_pork"]
+        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
+        # Retrieving the data
+        omelette_t7_data = self.retrieve_data(omelette_t7)
+        corn_data = self.retrieve_data(corn)
+        pork_data = self.retrieve_data(raw_pork)
+        goose_eggs_data = self.retrieve_data(goose_eggs)
+        # Organazing the data
+        omellete_t7_prices = self.organize_data(omelette_t7_data)
+        corn_prices = self.organize_data(corn_data)
+        pork_prices = self.organize_data(pork_data)
+        goose_eggs_prices = self.organize_data(goose_eggs_data)
+
+        return omellete_t7_prices, corn_prices, pork_prices, goose_eggs_prices
 
     '''
     ANOTAÇÃO: CACHE
