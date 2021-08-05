@@ -1,5 +1,6 @@
-from typing import final
 from libs.open_market import OpenMarket
+from utils.item_value import ItemValue
+from utils.recipes import Foods
 from math import floor
 
 
@@ -18,6 +19,7 @@ from math import floor
 
 
 meal = OpenMarket()
+
 
 FOODS = [{'food': 'omelette_T3',
           'wheat': 4,

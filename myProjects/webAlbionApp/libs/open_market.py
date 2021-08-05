@@ -14,7 +14,7 @@ class OpenMarket:
 
     @cached(cache=TTLCache(maxsize=3, ttl=900))
     def retrieve_data(self, url):
-        # endpoint = f"{self.BASE_URL}/T7_MEAL_OMELETTE%402.json"
+        # endpoint z= f"{self.BASE_URL}/T7_MEAL_OMELETTE%402.json"
         endpoint = f"{self.BASE_URL}/{url}.json"
         return requests.get(endpoint).json()  # json --> Dicionário
 
