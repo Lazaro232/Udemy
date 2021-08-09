@@ -1,4 +1,4 @@
-class Foods:
+class Recipes:
     OMELETTE = {
         "T3": {'wheat': 4,
                'chicken': 8,
