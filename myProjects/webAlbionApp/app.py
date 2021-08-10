@@ -30,5 +30,6 @@ def meal(food_name):
     return render_template('food_result.html', food=food)
 
 
+@app.route('/')
 if __name__ == '__main__':
     app.run(debug=True)
