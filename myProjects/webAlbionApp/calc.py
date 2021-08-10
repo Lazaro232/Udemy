@@ -39,11 +39,13 @@ class Calculations:
         total_cost = material_cost + craft_cost + sell_cost
 
         gross_profit = food_price * amount_crafted
-        result = gross_profit - total_cost
-        final_result = abs(floor(result))
-        result_str = "de {:,} pratas".format(final_result).replace(',', '.')
+        result = floor(gross_profit - total_cost)
+        # Printing
+        # final_result = abs(floor(result))
+        # result_str = "de {:,} pratas".format(final_result).replace(',', '.')
+        # if result < 0:
+        #     print(f"{city}: Prejuízo {result_str}")
+        # else:
+        #     print(f"{city}: Lucro {result_str}")
 
-        if result < 0:
-            print(f"{city}: Prejuízo {result_str}")
-        else:
-            print(f"{city}: Lucro {result_str}")
+        return result

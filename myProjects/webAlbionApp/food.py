@@ -22,8 +22,7 @@ class Food:
         # User informations
         (amount_to_craft, tax_fee, focus) = self.get_user_info()
         user_info = [amount_to_craft, tax_fee, focus]
-        print('---- OMELETE T3 ----')
-
+        city_result = {}
         for city_info in range(len(omelette)):
             omelette_price = omelette[city_info]['price']
             wheat_price = wheat[city_info]['price']
@@ -39,8 +38,11 @@ class Food:
             ]
 
             # Calculations
-            self.calc.calculations(user_info, omelette_info, city)
-        print('---- Final OMELETE T3 ----\n')
+            result = self.calc.calculations(user_info, omelette_info, city)
+            result_dict = {city: result}
+            city_result.update(result_dict)
+
+        return city_result
 
     def omelette_t5(self):
         # Albion informations
@@ -48,8 +50,7 @@ class Food:
         # User informations
         (amount_to_craft, tax_fee, focus) = self.get_user_info()
         user_info = [amount_to_craft, tax_fee, focus]
-        print('---- OMELETE T5 ----')
-
+        city_result = {}
         for city_info in range(len(omelette)):
             omelette_price = omelette[city_info]['price']
             cabbage_price = cabbage[city_info]['price']
@@ -65,8 +66,11 @@ class Food:
             ]
 
             # Calculations
-            self.calc.calculations(user_info, omelette_info, city)
-        print('---- Final OMELETE T5 ----\n')
+            result = self.calc.calculations(user_info, omelette_info, city)
+            result_dict = {city: result}
+            city_result.update(result_dict)
+
+        return city_result
 
     def omelette_t7(self):
         # Albion informations
@@ -74,8 +78,7 @@ class Food:
         # User informations
         (amount_to_craft, tax_fee, focus) = self.get_user_info()
         user_info = [amount_to_craft, tax_fee, focus]
-        print('---- OMELETE T7 ----')
-
+        city_result = {}
         for city_info in range(len(omelette)):
             omelette_price = omelette[city_info]['price']
             corn_price = corn[city_info]['price']
@@ -91,5 +94,8 @@ class Food:
             ]
 
             # Calculations
-            self.calc.calculations(user_info, omelette_info, city)
-        print('---- Final OMELETE T7 ----\n')
+            result = self.calc.calculations(user_info, omelette_info, city)
+            result_dict = {city: result}
+            city_result.update(result_dict)
+
+        return city_result
