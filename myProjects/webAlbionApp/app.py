@@ -26,10 +26,11 @@ def home():
 @app.route('/food/<food_name>')
 def meal(food_name):
     food = foods.get(food_name)
-
     return render_template('food_result.html', food=food)
 
 
-@app.route('/')
+# @app.route('/')
+
+
 if __name__ == '__main__':
     app.run(debug=True)
