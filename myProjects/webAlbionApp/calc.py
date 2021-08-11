@@ -1,3 +1,5 @@
+from os import fork
+from typing import final
 from utils.fees import Fees
 from math import floor
 
@@ -40,6 +42,8 @@ class Calculations:
 
         gross_profit = food_price * amount_crafted
         result = floor(gross_profit - total_cost)
+        format_result = format(result, ",")
+
         # Printing
         # final_result = abs(floor(result))
         # result_str = "de {:,} pratas".format(final_result).replace(',', '.')
@@ -48,4 +52,4 @@ class Calculations:
         # else:
         #     print(f"{city}: Lucro {result_str}")
 
-        return result
+        return format_result
