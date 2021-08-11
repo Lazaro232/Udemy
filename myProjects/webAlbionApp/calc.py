@@ -1,5 +1,3 @@
-from os import fork
-from typing import final
 from utils.fees import Fees
 from math import floor
 
@@ -13,6 +11,10 @@ class Calculations:
         focus = user_info[2]
         food_price = food_info[0][0]
         item_value = food_info[0][1]
+
+        # print(amount_to_craft)
+        # print(tax_fee)
+        # print(focus)
 
         tax_to_craft = tax_fee * 5 * item_value
         if focus:
@@ -30,6 +32,8 @@ class Calculations:
             return_rate**2 + return_rate**3 + return_rate**4
 
         amount_crafted = floor(amount_to_craft * real_return_rate / 10)*10
+        print(real_return_rate)
+        print(amount_crafted)
 
         resource_cost = 0
         for resource_info in food_info[1:]:

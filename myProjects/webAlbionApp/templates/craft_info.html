@@ -3,6 +3,26 @@
 
 {% block content %}
 
+<h1>Fill the fields bellow</h1>
+<form method="POST">
+    <div>
+        <label for="quantity">How much to craft (e.g, 100)</label>
+        <input type="text" name="quantity">
+    </div>
 
+    <div>
+        <label for="tax">Tax fee (e.g, 50)</label>
+        <input type="text" name="tax">
+    </div>
+
+    <div>
+        <label for="focus">Focus</label>
+        <input type="checkbox" name="focus">
+    </div>
+
+    <div>
+        <input type="submit">
+    </div>
+</form>
 
 {% endblock content %}
