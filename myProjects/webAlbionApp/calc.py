@@ -6,18 +6,13 @@ from math import floor
 
 class Calculations:
     def calculations(self, user_info: list, food_info: list, city: str):
-        amount_to_craft = user_info[0]
-        tax_fee = user_info[1]
-        focus = user_info[2]
+        amount_to_craft, tax_fee, focus = user_info
+        tax_fee = tax_fee/100
         food_price = food_info[0][0]
         item_value = food_info[0][1]
 
-        # print(amount_to_craft)
-        # print(tax_fee)
-        # print(focus)
-
         tax_to_craft = tax_fee * 5 * item_value
-        if focus:
+        if focus == '1':
             if city == 'Caerleon':
                 return_rate = 0.479
             else:
@@ -45,13 +40,5 @@ class Calculations:
         gross_profit = food_price * amount_crafted
         result = floor(gross_profit - total_cost)
         format_result = format(result, ",")
-
-        # Printing
-        # final_result = abs(floor(result))
-        # result_str = "de {:,} pratas".format(final_result).replace(',', '.')
-        # if result < 0:
-        #     print(f"{city}: Prejuízo {result_str}")
-        # else:
-        #     print(f"{city}: Lucro {result_str}")
 
         return format_result

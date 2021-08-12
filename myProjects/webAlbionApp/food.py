@@ -16,13 +16,10 @@ class Food:
         focus = int(input('1: Com foco --- 0: Sem foco '))
         return amount_to_craft, tax_fee, focus
 
-    def omelette_t3(self, user_info_list: list):
+    def omelette_t3(self, user_info: list):
         # Albion informations
         (omelette, wheat, chicken, hen) = self.meal.omelette_t3()
-        # User informations
-        amount_to_craft, tax_fee, focus = user_info_list
 
-        user_info = [int(amount_to_craft), int(tax_fee), focus]
         city_result = {}
         for city_info in range(len(omelette)):
             omelette_price = omelette[city_info]['price']
@@ -45,11 +42,11 @@ class Food:
 
         return city_result
 
-    def omelette_t5(self, user_info: list):
+    def omelette_t5(self, user_info_list: list):
         # Albion informations
         (omelette, cabbage, goose, goose_eggs) = self.meal.omelette_t5()
         # User informations
-        (amount_to_craft, tax_fee, focus) = user_info
+        (amount_to_craft, tax_fee, focus) = user_info_list
         user_info = [amount_to_craft, tax_fee, focus]
         city_result = {}
         for city_info in range(len(omelette)):
