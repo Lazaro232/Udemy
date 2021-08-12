@@ -14,24 +14,17 @@ def home():
 def meal(food_name, amount_to_craft, tax_fee, focus):
     user_info = [amount_to_craft, tax_fee, focus]
     food = Food()
-    if food_name == 'omelete_t3':
+    if food_name == 'omelette_t3':
         food_str = 'Tier 3 Omelette'
-        omelette_t3_dict = food.omelette_t3(user_info)
-        return render_template('food_result.html',
-                               food=omelette_t3_dict,
-                               food_name=food_str)
-    elif food_name == 'omelete_t5':
+    elif food_name == 'omelette_t5':
         food_str = 'Tier 5 Omelette'
-        omelette_t5_dict = food.omelette_t5(user_info)
-        return render_template('food_result.html',
-                               food=omelette_t5_dict,
-                               food_name=food_str)
-    elif food_name == 'omelete_t7':
+    elif food_name == 'omelette_t7':
         food_str = 'Tier 7 Omelette'
-        omelette_t7_dict = food.omelette_t7(user_info)
-        return render_template('food_result.html',
-                               food=omelette_t7_dict,
-                               food_name=food_str)
+
+    omelette_dict = food.omelette(user_info, food_name)
+    return render_template('food_result.html',
+                           food=omelette_dict,
+                           food_name=food_str)
 
 
 @app.route('/form/<food_name>', methods=['GET', 'POST'])

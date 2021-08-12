@@ -9,30 +9,56 @@ class Food:
         self.meal = OpenMarket()
         self.calc = Calculations()
 
-    def get_user_info(self):
-        amount_to_craft = float(
-            input('Quantidade a ser fabricada (e.g, 100): '))
-        tax_fee = float(input('Taxa da loja a ser utilizada (e.g, 50): '))/100
-        focus = int(input('1: Com foco --- 0: Sem foco '))
-        return amount_to_craft, tax_fee, focus
-
-    def omelette_t3(self, user_info: list):
+    def omelette(self, user_info: list, food_name: str):
         # Albion informations
-        (omelette, wheat, chicken, hen) = self.meal.omelette_t3()
+        (omelette_t3, wheat, chicken, hen) = self.meal.omelette_t3()
+        (omelette_t5, cabbage, goose, goose_eggs) = self.meal.omelette_t5()
+        (omelette_t7, corn, pork, goose_eggs) = self.meal.omelette_t7()
+
+        # User information
+        if food_name == "omelette_t3":
+            omelette = omelette_t3
+            ingredient_1 = wheat
+            ingredient_2 = chicken
+            ingredient_3 = hen
+            tier = "T3"
+            ing_1_tag = "wheat"
+            ing_2_tag = "chicken"
+            ing_3_tag = "hen"
+
+        elif food_name == "omelette_t5":
+            omelette = omelette_t5
+            ingredient_1 = cabbage
+            ingredient_2 = goose
+            ingredient_3 = goose_eggs
+            tier = "T5"
+            ing_1_tag = "cabbage"
+            ing_2_tag = "goose"
+            ing_3_tag = "goose_eggs"
+
+        elif food_name == "omelette_t7":
+            omelette = omelette_t7
+            ingredient_1 = corn
+            ingredient_2 = pork
+            ingredient_3 = goose_eggs
+            tier = "T7"
+            ing_1_tag = "corn"
+            ing_2_tag = "pork"
+            ing_3_tag = "goose_eggs"
 
         city_result = {}
         for city_info in range(len(omelette)):
             omelette_price = omelette[city_info]['price']
-            wheat_price = wheat[city_info]['price']
-            chicken_price = chicken[city_info]['price']
-            hen_price = hen[city_info]['price']
+            ing_1_price = ingredient_1[city_info]['price']
+            ing_2_price = ingredient_2[city_info]['price']
+            ing_3_price = ingredient_3[city_info]['price']
             city = omelette[city_info]['city']
 
             omelette_info = [
-                [omelette_price, ItemValue.OMELETTE["T3"]],
-                [wheat_price, Recipes.OMELETTE['T3']['wheat']],
-                [chicken_price, Recipes.OMELETTE['T3']['chicken']],
-                [hen_price, Recipes.OMELETTE['T3']['hen']]
+                [omelette_price, ItemValue.OMELETTE[tier]],
+                [ing_1_price, Recipes.OMELETTE[tier][ing_1_tag]],
+                [ing_2_price, Recipes.OMELETTE[tier][ing_2_tag]],
+                [ing_3_price, Recipes.OMELETTE[tier][ing_3_tag]]
             ]
 
             # Calculations
@@ -41,69 +67,3 @@ class Food:
             city_result.update(result_dict)
 
         return city_result
-
-    def omelette_t5(self, user_info_list: list):
-        # Albion informations
-        (omelette, cabbage, goose, goose_eggs) = self.meal.omelette_t5()
-        # User informations
-        (amount_to_craft, tax_fee, focus) = user_info_list
-        user_info = [amount_to_craft, tax_fee, focus]
-        city_result = {}
-        for city_info in range(len(omelette)):
-            omelette_price = omelette[city_info]['price']
-            cabbage_price = cabbage[city_info]['price']
-            goose_price = goose[city_info]['price']
-            goose_egs_price = goose_eggs[city_info]['price']
-            city = omelette[city_info]['city']
-
-            omelette_info = [
-                [omelette_price, ItemValue.OMELETTE["T5"]],
-                [cabbage_price, Recipes.OMELETTE['T5']['cabbage']],
-                [goose_price, Recipes.OMELETTE['T5']['goose']],
-                [goose_egs_price, Recipes.OMELETTE['T5']['goose_eggs']]
-            ]
-
-            # Calculations
-            result = self.calc.calculations(user_info, omelette_info, city)
-            result_dict = {city: result}
-            city_result.update(result_dict)
-
-        return city_result
-
-    def omelette_t7(self, user_info: list):
-        # Albion informations
-        (omelette, corn, pork, goose_eggs) = self.meal.omelette_t7()
-        # User informations
-        (amount_to_craft, tax_fee, focus) = user_info
-        user_info = [amount_to_craft, tax_fee, focus]
-        city_result = {}
-        for city_info in range(len(omelette)):
-            omelette_price = omelette[city_info]['price']
-            corn_price = corn[city_info]['price']
-            pork_price = pork[city_info]['price']
-            goose_egs_price = goose_eggs[city_info]['price']
-            city = omelette[city_info]['city']
-
-            omelette_info = [
-                [omelette_price, ItemValue.OMELETTE["T7"]],
-                [corn_price, Recipes.OMELETTE['T7']['corn']],
-                [pork_price, Recipes.OMELETTE['T7']['pork']],
-                [goose_egs_price, Recipes.OMELETTE['T7']['goose_eggs']]
-            ]
-
-            # Calculations
-            result = self.calc.calculations(user_info, omelette_info, city)
-            result_dict = {city: result}
-            city_result.update(result_dict)
-
-        return city_result
-
-    def test(self):
-        list = [1, 2, 3]
-        (arg1, agr2, agr3) = list
-
-        print(arg1, agr2, agr3)
-
-
-food = Food()
-food.test()
