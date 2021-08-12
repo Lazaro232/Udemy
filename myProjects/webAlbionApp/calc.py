@@ -32,8 +32,6 @@ class Calculations:
             return_rate**2 + return_rate**3 + return_rate**4
 
         amount_crafted = floor(amount_to_craft * real_return_rate / 10)*10
-        print(real_return_rate)
-        print(amount_crafted)
 
         resource_cost = 0
         for resource_info in food_info[1:]:
