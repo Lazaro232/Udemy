@@ -10,7 +10,8 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/result/<food_name>/<int:amount_to_craft>/<int:tax_fee>/<focus>', methods=['GET', 'POST'])
+@app.route('/result/<food_name>/<int:amount_to_craft>/<int:tax_fee>/<focus>',
+           methods=['GET', 'POST'])
 def meal(food_name, amount_to_craft, tax_fee, focus):
     user_info = [amount_to_craft, tax_fee, focus]
     food = Food()

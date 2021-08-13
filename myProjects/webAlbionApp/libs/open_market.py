@@ -1,18 +1,6 @@
 import requests
-
 from cachetools import cached, TTLCache
 from utils.endpoints import EndPoints
-
-# URL BASE --> https://www.albion-online-data.com/api/v2/stats/Prices ...
-
-# Omelete .1 --> .../T7_MEAL_OMELETTE%401.json
-# Omelete .2 --> .../T7_MEAL_OMELETTE%402.json
-
-# Beef .1 --> .../T8_MEAL_STEW%401.json
-# Beef .2 --> .../T8_MEAL_STEW%402.json
-# Beef .3 --> .../T8_MEAL_STEW%403.json
-
-# Exemplo: ENDPOINT = "https://www.albion-online-data.com/api/v2/stats/Prices/T7_MEAL_OMELETTE%402.json"
 
 
 class OpenMarket:
@@ -25,16 +13,6 @@ class OpenMarket:
     def retrieve_data(self, url):
         endpoint = f"{self.BASE_URL}/{url}.json"
         return requests.get(endpoint).json()  # json --> Dicionário
-
-    def printPrices(self):
-        # Recuperando dados da API
-        city_dict = self.retrieve_data("T3_WHEAT")
-        # Printando cidades selecionadas em CITY_OPTIONS
-        for city_data in city_dict:
-            city = city_data['city']
-            price = city_data['sell_price_min']
-            if city in self.CITY_OPTIONS:
-                print(f"{city} is: {price: ,}".replace(',', '.'))
 
     def organize_data(self, data):
         list = [{"city": city['city'], "price": city['sell_price_min']}
@@ -77,13 +55,26 @@ class OpenMarket:
 
         return omelette_prices, ing_1_prices, ing_2_prices, ing_3_prices
 
-    '''
-    ANOTAÇÃO: CACHE
-        # maxsize=2 --> O CACHE irá guardar os argumentos da função e o que ela retorna.
-        Como a função 'retrieve_data' não possui argumentos, um maxsize=2 é suficiente.
-        Se ela possuísse argumentos, o maxsize teria de aumentar
 
-        # ttl = 900 --> Após quanto tempo de aplicação rodando será realizada uma ...
-        ... REQUEST ao servidor novamente para atualizar o valor no CACHE
-        Neste caso, após 900 segundos (15 minutos) será realizada uma REQUEST nova ao servidor.
-    '''
+'''
+ANOTAÇÃO:
+1) maxsize=2
+--> O CACHE irá guardar os argumentos da função e o que ela retorna.
+Como a função 'retrieve_data' não possui argumentos, um maxsize=2 é suficiente.
+Se ela possuísse argumentos, o maxsize teria de aumentar
+
+2) ttl = 900 -
+-> Após quanto tempo de aplicação rodando será realizada uma ...
+... REQUEST ao servidor novamente para atualizar o valor no CACHE. Neste caso,
+após 900 segundos (15 minutos) será realizada uma REQUEST nova ao servidor.
+
+3) URL BASE --> https://www.albion-online-data.com/api/v2/stats/Prices ...
+
+4)
+    Omelete .1 --> .../T7_MEAL_OMELETTE%401.json
+    Omelete .2 --> .../T7_MEAL_OMELETTE%402.json
+    Beef .1 --> .../T8_MEAL_STEW%401.json
+    Beef .2 --> .../T8_MEAL_STEW%402.json
+    Beef .3 --> .../T8_MEAL_STEW%403.json
+Exemplo: ENDPOINT = "https://www.albion-online-data.com/api/v2/stats/Prices/T7_MEAL_OMELETTE%402.json"
+'''

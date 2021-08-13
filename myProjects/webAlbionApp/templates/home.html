@@ -5,18 +5,27 @@
     <h1>Welcome to your food calculator.</h1>
     <h2>Choose your food</h2>
 
-    <div>
-        <a href="{{ url_for('form', food_name='omelette_t3') }}">T3 Omelette</a>
-    </div>
-
-    <div>
-        <a href="{{ url_for('form', food_name='omelette_t5') }}">T5 Omelette</a>
-    </div>
-
-    <div>
-        <a href="{{ url_for('form', food_name='omelette_t7') }}">T7 Omelette</a>
-    </div>
-
+    <table style="width:80%">
+        <tr>
+          <th>Omelette</th>
+          <th>Stew</th>
+          <th>Sandwich</th>
+        </tr>
+        <tr>
+          <td><a href="{{ url_for('form', food_name='omelette_t3') }}">T3 Omelette</a></td>
+          <td><a href="{{ url_for('form', food_name='stew_t4') }}">T4 Stew</a></td>
+          <td>50</td>
+        </tr>
+        <tr>
+          <td><a href="{{ url_for('form', food_name='stew_t6') }}">T5 Omelette</a></td>
+          <td><a href="{{ url_for('form', food_name='') }}">T6 Stew</a></td>
+          <td>94</td>
+        </tr>
+        <tr>
+            <td><a href="{{ url_for('form', food_name='omelette_t7') }}">T5 Omelette</a></td>
+            <td><a href="{{ url_for('form', food_name='stew_t8') }}">T8 Stew</a></td>
+        </tr>
+      </table>
 
 {% endblock content %}
     
