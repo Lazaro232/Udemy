@@ -37,6 +37,7 @@ class OpenMarket:
             ing_endpoint_3 = "goose_eggs"
 
         # Omelette endpoints
+        print(food_name)
         omelette_endpoint = food_name
         omelette = EndPoints.RESOURCES[omelette_endpoint]
         ing_1 = EndPoints.RESOURCES[ing_endpoint_1]

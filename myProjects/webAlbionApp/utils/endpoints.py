@@ -1,6 +1,6 @@
 class EndPoints:
     RESOURCES = {
-        ''' OMELETTE '''
+        # OMELETTE
         "omelette_t3": "T3_MEAL_OMELETTE",
         "omelette_t5": "T5_MEAL_OMELETTE",
         "omelette_t7": "T7_MEAL_OMELETTE",
@@ -14,7 +14,7 @@ class EndPoints:
         "raw_pork": "T7_MEAT",
         # goose eggs --> Already in
 
-        ''' STEW'''
+        # STEW
         "stew_t4": "T4_MEAL_STEW",
         "stew_t6": "T6_MEAL_STEW",
         "stew_t8": "T8_MEAL_STEW",
@@ -27,14 +27,14 @@ class EndPoints:
         "raw_beef": "T8_MEAT",
         # bread
 
-        ''' SOUP '''
+        # SOUP
         "soup_t1": "T1_MEAL_SOUP",
         "soup_t3": "T3_MEAL_SOUP",
         "soup_t5": "T5_MEAL_SOUP",
         "carrot": "T1_CARROT",
         # wheat and cabbage
 
-        ''' ROAST '''
+        # ROAST
         "roast_t3": "T3_MEAL_ROAST",
         "roast_t5": "T5_MEAL_ROAST",
         "roast_t7": "T7_MEAL_ROAST",
@@ -44,7 +44,7 @@ class EndPoints:
         "cow_milk": "T8_MILK",
         # raw_chicken, cabbage, raw_goose,
 
-        ''' SANDWICH '''
+        # SANDWICH
         "sandwich_t4": "T4_MEAL_SANDWICH",
         "sandwich_t6": "T6_MEAL_SANDWICH",
         "sandwich_t8": "T8_MEAL_SANDWICH",
@@ -53,7 +53,7 @@ class EndPoints:
         "cow_butter": "T8_BUTTER",
         # bread, raw_goat, raw_mutton, raw_beef
 
-        ''' PIE '''
+        # PIE
         "pie_t3": "T3_MEAL_PIE",
         "pie_t5": "T5_MEAL_PIE",
         "pie_t7": "T7_MEAL_PIE",
@@ -61,7 +61,7 @@ class EndPoints:
         # wheat, raw_chicken, cabbage, raw_goose, goat_milk
         # corn, raw_pork, sheep_milk
 
-        ''' SALAD '''
+        # SALAD
         "salad_t1": "T1_MEAL_SOUP",
         "salad_t3": "T3_MEAL_SOUP",
         "salad_t5": "T5_MEAL_SOUP",
