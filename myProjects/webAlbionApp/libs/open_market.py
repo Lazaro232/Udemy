@@ -21,11 +21,8 @@ class OpenMarket:
     CITY_OPTIONS = ['Thetford', 'Fort Sterling',
                     'Lymhurst', 'Martlock', 'Caerleon', 'Bridgewatch']
 
-    # Definir um método INIT que receba qual comida deve ser trabalhada
-
     @cached(cache=TTLCache(maxsize=3, ttl=900))
     def retrieve_data(self, url):
-        # endpoint z= f"{self.BASE_URL}/T7_MEAL_OMELETTE%402.json"
         endpoint = f"{self.BASE_URL}/{url}.json"
         return requests.get(endpoint).json()  # json --> Dicionário
 
@@ -45,62 +42,40 @@ class OpenMarket:
         sorted_list = sorted(list, key=lambda x: x['city'])
         return sorted_list
 
-    def omelette_t3(self):
-        # TIER 3 (Chicken Omelette)
-        omellete_t3 = EndPoints.RESOURCES["omelette_t3"]
-        sheaf_of_wheat = EndPoints.RESOURCES["sheaf_of_wheat"]
-        raw_chicken = EndPoints.RESOURCES["raw_chicken"]
-        hen_eggs = EndPoints.RESOURCES["hen_eggs"]
+    def omelette(self, food_name):
+        if food_name == "omelette_t3":
+            ing_endpoint_1 = "sheaf_of_wheat"  # ing =  ingredient
+            ing_endpoint_2 = "raw_chicken"
+            ing_endpoint_3 = "hen_eggs"
+
+        elif food_name == "omelette_t5":
+            ing_endpoint_1 = "cabbage"
+            ing_endpoint_2 = "raw_goose"
+            ing_endpoint_3 = "goose_eggs"
+
+        elif food_name == "omelette_t7":
+            ing_endpoint_1 = "bundle_of_corn"
+            ing_endpoint_2 = "raw_pork"
+            ing_endpoint_3 = "goose_eggs"
+
+        # Omelette endpoints
+        omelette_endpoint = food_name
+        omelette = EndPoints.RESOURCES[omelette_endpoint]
+        ing_1 = EndPoints.RESOURCES[ing_endpoint_1]
+        ing_2 = EndPoints.RESOURCES[ing_endpoint_2]
+        ing_3 = EndPoints.RESOURCES[ing_endpoint_3]
         # Retrieving the data
-        omelette_t3_data = self.retrieve_data(omellete_t3)
-        wheat_data = self.retrieve_data(sheaf_of_wheat)
-        chicken_data = self.retrieve_data(raw_chicken)
-        hen_data = self.retrieve_data(hen_eggs)
+        omelette_data = self.retrieve_data(omelette)
+        ing_1_data = self.retrieve_data(ing_1)
+        ing_2_data = self.retrieve_data(ing_2)
+        ing_3_data = self.retrieve_data(ing_3)
         # Organazing the data
-        omellete_t3_prices = self.organize_data(omelette_t3_data)
-        wheat_prices = self.organize_data(wheat_data)
-        chicken_prices = self.organize_data(chicken_data)
-        hen_prices = self.organize_data(hen_data)
+        omelette_prices = self.organize_data(omelette_data)
+        ing_1_prices = self.organize_data(ing_1_data)
+        ing_2_prices = self.organize_data(ing_2_data)
+        ing_3_prices = self.organize_data(ing_3_data)
 
-        return omellete_t3_prices, wheat_prices, chicken_prices, hen_prices
-
-    def omelette_t5(self):
-        # TIER 5 (Goose Omelette)
-        omelette_t5 = EndPoints.RESOURCES["omelette_t5"]
-        cabbage = EndPoints.RESOURCES["cabbage"]
-        raw_goose = EndPoints.RESOURCES["raw_goose"]
-        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
-        # Retrieving the data
-        omelette_t5_data = self.retrieve_data(omelette_t5)
-        cabbage_data = self.retrieve_data(cabbage)
-        goose_data = self.retrieve_data(raw_goose)
-        goose_eggs_data = self.retrieve_data(goose_eggs)
-        # Organazing the data
-        omellete_t5_prices = self.organize_data(omelette_t5_data)
-        cabbage_prices = self.organize_data(cabbage_data)
-        goose_prices = self.organize_data(goose_data)
-        goose_eggs_prices = self.organize_data(goose_eggs_data)
-
-        return omellete_t5_prices, cabbage_prices, goose_prices, goose_eggs_prices
-
-    def omelette_t7(self):
-        # TIER 7 (Pork Omelette)
-        omelette_t7 = EndPoints.RESOURCES["omelette_t7"]
-        corn = EndPoints.RESOURCES["bundle_of_corn"]
-        raw_pork = EndPoints.RESOURCES["raw_pork"]
-        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
-        # Retrieving the data
-        omelette_t7_data = self.retrieve_data(omelette_t7)
-        corn_data = self.retrieve_data(corn)
-        pork_data = self.retrieve_data(raw_pork)
-        goose_eggs_data = self.retrieve_data(goose_eggs)
-        # Organazing the data
-        omellete_t7_prices = self.organize_data(omelette_t7_data)
-        corn_prices = self.organize_data(corn_data)
-        pork_prices = self.organize_data(pork_data)
-        goose_eggs_prices = self.organize_data(goose_eggs_data)
-
-        return omellete_t7_prices, corn_prices, pork_prices, goose_eggs_prices
+        return omelette_prices, ing_1_prices, ing_2_prices, ing_3_prices
 
     '''
     ANOTAÇÃO: CACHE

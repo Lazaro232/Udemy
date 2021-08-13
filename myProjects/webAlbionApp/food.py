@@ -11,36 +11,23 @@ class Food:
 
     def omelette(self, user_info: list, food_name: str):
         # Albion informations
-        (omelette_t3, wheat, chicken, hen) = self.meal.omelette_t3()
-        (omelette_t5, cabbage, goose, goose_eggs) = self.meal.omelette_t5()
-        (omelette_t7, corn, pork, goose_eggs) = self.meal.omelette_t7()
+        (omelette, ingredient_1, ingredient_2,
+         ingredient_3) = self.meal.omelette(food_name)
 
         # User information
         if food_name == "omelette_t3":
-            omelette = omelette_t3
-            ingredient_1 = wheat
-            ingredient_2 = chicken
-            ingredient_3 = hen
             tier = "T3"
             ing_1_tag = "wheat"
             ing_2_tag = "chicken"
             ing_3_tag = "hen"
 
         elif food_name == "omelette_t5":
-            omelette = omelette_t5
-            ingredient_1 = cabbage
-            ingredient_2 = goose
-            ingredient_3 = goose_eggs
             tier = "T5"
             ing_1_tag = "cabbage"
             ing_2_tag = "goose"
             ing_3_tag = "goose_eggs"
 
         elif food_name == "omelette_t7":
-            omelette = omelette_t7
-            ingredient_1 = corn
-            ingredient_2 = pork
-            ingredient_3 = goose_eggs
             tier = "T7"
             ing_1_tag = "corn"
             ing_2_tag = "pork"
