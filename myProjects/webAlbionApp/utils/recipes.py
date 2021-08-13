@@ -23,10 +23,16 @@ class Recipes:
                'raw_beef': 72}
     }
 
-    SOUP = {
-        "T1": {"carrot": 16},
-        "T3": {"wheat": 48},
-        "T5": {"cabbage": 144}
+    SANDWICH = {
+        "T4": {'bread': 4,
+               'raw_goat': 8,
+               'goat_butter': 2},
+        "T6": {'bread': 12,
+               'raw_mutton': 24,
+               'sheep_butter': 6},
+        "T8": {'bread': 36,
+               'raw_beef': 72,
+               'cow_butter': 18}
     }
 
     ROAST = {
@@ -39,18 +45,6 @@ class Recipes:
         "T7": {'corn': 36,
                'raw_pork': 72,
                'cow_milk': 36}
-    }
-
-    SANDWICH = {
-        "T4": {'bread': 4,
-               'raw_goat': 8,
-               'goat_butter': 2},
-        "T6": {'bread': 12,
-               'raw_mutton': 24,
-               'sheep_butter': 6},
-        "T8": {'bread': 36,
-               'raw_beef': 72,
-               'cow_butter': 18}
     }
 
     PIE = {
@@ -74,4 +68,10 @@ class Recipes:
                'wheat': 24, },
         "T5": {'potato': 72,
                'cabbage': 72, }
+    }
+
+    SOUP = {
+        "T1": {"carrot": 16},
+        "T3": {"wheat": 48},
+        "T5": {"cabbage": 144}
     }
