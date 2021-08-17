@@ -6,9 +6,9 @@ class ItemValue:
     }
 
     STEW = {
-        "T4": 1,
-        "T6": 2,
-        "T8": 3
+        "T4": 60,
+        "T6": 180,
+        "T8": 560
     }
 
     SOUP = {

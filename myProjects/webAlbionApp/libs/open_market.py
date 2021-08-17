@@ -1,6 +1,8 @@
 import requests
 from cachetools import cached, TTLCache
 from utils.endpoints import EndPoints
+from utils.item_value import ItemValue
+from utils.recipes import Recipes
 
 
 class OpenMarket:
@@ -20,41 +22,77 @@ class OpenMarket:
         sorted_list = sorted(list, key=lambda x: x['city'])
         return sorted_list
 
-    def omelette(self, food_name):
-        if food_name == "omelette_t3":
-            ing_endpoint_1 = "sheaf_of_wheat"  # ing =  ingredient
-            ing_endpoint_2 = "raw_chicken"
-            ing_endpoint_3 = "hen_eggs"
+    def all_foods(self, food_name):
+        # Food endpoints
+        ing_list, item_value_dict, recipe_dict, tier = self.food_endpoint(
+            food_name)
+        food_endpoint = food_name
+        food = EndPoints.RESOURCES[food_endpoint]
+        ing_endpoint_list = []
+        for ing in ing_list:
+            ing_endpoint_list.append(EndPoints.RESOURCES[ing])
 
-        elif food_name == "omelette_t5":
-            ing_endpoint_1 = "cabbage"
-            ing_endpoint_2 = "raw_goose"
-            ing_endpoint_3 = "goose_eggs"
-
-        elif food_name == "omelette_t7":
-            ing_endpoint_1 = "bundle_of_corn"
-            ing_endpoint_2 = "raw_pork"
-            ing_endpoint_3 = "goose_eggs"
-
-        # Omelette endpoints
-        print(food_name)
-        omelette_endpoint = food_name
-        omelette = EndPoints.RESOURCES[omelette_endpoint]
-        ing_1 = EndPoints.RESOURCES[ing_endpoint_1]
-        ing_2 = EndPoints.RESOURCES[ing_endpoint_2]
-        ing_3 = EndPoints.RESOURCES[ing_endpoint_3]
         # Retrieving the data
-        omelette_data = self.retrieve_data(omelette)
-        ing_1_data = self.retrieve_data(ing_1)
-        ing_2_data = self.retrieve_data(ing_2)
-        ing_3_data = self.retrieve_data(ing_3)
-        # Organazing the data
-        omelette_prices = self.organize_data(omelette_data)
-        ing_1_prices = self.organize_data(ing_1_data)
-        ing_2_prices = self.organize_data(ing_2_data)
-        ing_3_prices = self.organize_data(ing_3_data)
+        food_data = self.retrieve_data(food)
+        ing_data_list = []
+        for ing in ing_endpoint_list:
+            ing_data_list.append(self.retrieve_data(ing))
 
-        return omelette_prices, ing_1_prices, ing_2_prices, ing_3_prices
+        # Organazing the data
+        food_prices = self.organize_data(food_data)
+        ing_price_list = []
+        for ing in ing_data_list:
+            ing_price_list.append(self.organize_data(ing))
+
+        return food_prices, ing_price_list, ing_list, item_value_dict, recipe_dict, tier
+
+    def food_endpoint(self, food_name):
+        if 'omelette' in food_name:
+            item_value_dict = ItemValue.OMELETTE
+            recipe_dict = Recipes.OMELETTE
+            if food_name == "omelette_t3":
+                tier = "T3"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "omelette_t5":
+                tier = "T5"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "omelette_t7":
+                tier = "T7"
+                tag_list = list(recipe_dict[tier].keys())
+
+        elif 'stew' in food_name:
+            item_value_dict = ItemValue.STEW
+            recipe_dict = Recipes.STEW
+            if food_name == "stew_t4":
+                tier = "T4"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "stew_t6":
+                tier = "T6"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "stew_t8":
+                tier = "T8"
+                tag_list = list(recipe_dict[tier].keys())
+
+        elif 'sandwich' in food_name:
+            item_value_dict = ItemValue.SANDWICH
+            recipe_dict = Recipes.SANDWICH
+            if food_name == "sandwich_t4":
+                tier = "T4"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "sandwich_t6":
+                tier = "T6"
+                tag_list = list(recipe_dict[tier].keys())
+
+            elif food_name == "sandwich_t8":
+                tier = "T8"
+                tag_list = list(recipe_dict[tier].keys())
+
+        return tag_list, item_value_dict, recipe_dict, tier
 
 
 '''

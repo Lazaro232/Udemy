@@ -1,13 +1,13 @@
 class Recipes:
     OMELETTE = {
-        "T3": {'wheat': 4,
-               'chicken': 8,
-               'hen': 2},
+        "T3": {'sheaf_of_wheat': 4,
+               'raw_chicken': 8,
+               'hen_eggs': 2},
         "T5": {'cabbage': 12,
-               'goose': 24,
+               'raw_goose': 24,
                'goose_eggs': 6},
-        "T7": {'corn': 36,
-               'pork': 72,
+        "T7": {'bundle_of_corn': 36,
+               'raw_pork': 72,
                'goose_eggs': 18}
     }
 
@@ -42,20 +42,20 @@ class Recipes:
         "T5": {'cabbage': 12,
                'raw_goose': 24,
                'sheep_milk': 12},
-        "T7": {'corn': 36,
+        "T7": {'bundle_of_corn': 36,
                'raw_pork': 72,
                'cow_milk': 36}
     }
 
     PIE = {
-        "T3": {'wheat': 2,
+        "T3": {'sheaf_of_wheat': 2,
                'flour': 4,
                'raw_chicken': 8},
         "T5": {'cabbage': 6,
                'flour': 12,
                'raw_goose': 24,
                'goat_milk': 6},
-        "T7": {'corn': 18,
+        "T7": {'bundle_of_corn': 18,
                'flour': 36,
                'raw_pork': 72,
                'sheep_milk': 18}
@@ -65,13 +65,13 @@ class Recipes:
         "T1": {'carrot': 8,
                'bean': 8, },
         "T3": {'turnip': 24,
-               'wheat': 24, },
+               'sheaf_of_wheat': 24, },
         "T5": {'potato': 72,
                'cabbage': 72, }
     }
 
     SOUP = {
         "T1": {"carrot": 16},
-        "T3": {"wheat": 48},
+        "T3": {"sheaf_of_wheat": 48},
         "T5": {"cabbage": 144}
     }
