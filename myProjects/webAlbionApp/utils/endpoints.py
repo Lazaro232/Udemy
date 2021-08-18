@@ -62,9 +62,9 @@ class EndPoints:
         # corn, raw_pork, sheep_milk
 
         # SALAD
-        "salad_t1": "T1_MEAL_SOUP",
-        "salad_t3": "T3_MEAL_SOUP",
-        "salad_t5": "T5_MEAL_SOUP",
+        "salad_t2": "T2_MEAL_SALAD",
+        "salad_t4": "T4_MEAL_SALAD",
+        "salad_t6": "T6_MEAL_SALAD",
         # carrot, bean, turnip, wheat, potato, cabbage
 
 

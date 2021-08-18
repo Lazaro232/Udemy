@@ -62,11 +62,11 @@ class Recipes:
     }
 
     SALAD = {
-        "T1": {'carrot': 8,
+        "T2": {'carrot': 8,
                'bean': 8, },
-        "T3": {'turnip': 24,
+        "T4": {'turnip': 24,
                'sheaf_of_wheat': 24, },
-        "T5": {'potato': 72,
+        "T6": {'potato': 72,
                'cabbage': 72, }
     }
 
