@@ -15,21 +15,11 @@ def home():
 def meal(food_name, amount_to_craft, tax_fee, focus):
     user_info = [amount_to_craft, tax_fee, focus]
     food = Food()
-    if 'omelette' in food_name:
-        if food_name == 'omelette_t3':
-            food_str = 'Tier 3 Omelette'
-        elif food_name == 'omelette_t5':
-            food_str = 'Tier 5 Omelette'
-        elif food_name == 'omelette_t7':
-            food_str = 'Tier 7 Omelette'
+    food_type, tier = food_name.split("_")  # ['stew', 't4']
+    _, tier_number = tier.split("t")  # ['', '4']
+    food_type_title = food_type.title()  # 'Stew'
 
-    elif 'stew' in food_name:
-        if food_name == 'stew_t4':
-            food_str = 'Tier 4 Stew'
-        elif food_name == 'stew_t6':
-            food_str = 'Tier 6 Stew'
-        elif food_name == 'stew_t8':
-            food_str = 'Tier 8 Stew'
+    food_str = 'Tier ' + tier_number + ' ' + food_type_title
 
     food_dict = food.all_foods(user_info, food_name)
     return render_template('food_result.html',

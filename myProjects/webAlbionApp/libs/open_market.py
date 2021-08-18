@@ -47,50 +47,37 @@ class OpenMarket:
         return food_prices, ing_price_list, ing_list, item_value_dict, recipe_dict, tier
 
     def food_endpoint(self, food_name):
+        _, tier_string = food_name.split("_")  # ['omelette', 't3']
+        tier = tier_string.upper()  # 'T3'
         if 'omelette' in food_name:
             item_value_dict = ItemValue.OMELETTE
             recipe_dict = Recipes.OMELETTE
-            if food_name == "omelette_t3":
-                tier = "T3"
-                tag_list = list(recipe_dict[tier].keys())
-
-            elif food_name == "omelette_t5":
-                tier = "T5"
-                tag_list = list(recipe_dict[tier].keys())
-
-            elif food_name == "omelette_t7":
-                tier = "T7"
-                tag_list = list(recipe_dict[tier].keys())
 
         elif 'stew' in food_name:
             item_value_dict = ItemValue.STEW
             recipe_dict = Recipes.STEW
-            if food_name == "stew_t4":
-                tier = "T4"
-                tag_list = list(recipe_dict[tier].keys())
-
-            elif food_name == "stew_t6":
-                tier = "T6"
-                tag_list = list(recipe_dict[tier].keys())
-
-            elif food_name == "stew_t8":
-                tier = "T8"
-                tag_list = list(recipe_dict[tier].keys())
 
         elif 'sandwich' in food_name:
             item_value_dict = ItemValue.SANDWICH
             recipe_dict = Recipes.SANDWICH
-            if food_name == "sandwich_t4":
-                tier = "T4"
-                tag_list = list(recipe_dict[tier].keys())
 
-            elif food_name == "sandwich_t6":
-                tier = "T6"
-                tag_list = list(recipe_dict[tier].keys())
+        elif 'roast' in food_name:
+            item_value_dict = ItemValue.ROAST
+            recipe_dict = Recipes.ROAST
 
-            elif food_name == "sandwich_t8":
-                tier = "T8"
-                tag_list = list(recipe_dict[tier].keys())
+        elif 'pie' in food_name:
+            item_value_dict = ItemValue.PIE
+            recipe_dict = Recipes.PIE
+
+        elif 'salad' in food_name:
+            item_value_dict = ItemValue.SALAD
+            recipe_dict = Recipes.SALAD
+
+        elif 'soup' in food_name:
+            item_value_dict = ItemValue.SOUP
+            recipe_dict = Recipes.SOUP
+
+        tag_list = list(recipe_dict[tier].keys())
 
         return tag_list, item_value_dict, recipe_dict, tier
 
