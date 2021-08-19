@@ -1,7 +1,8 @@
 import requests
-
 from cachetools import cached, TTLCache
 from utils.endpoints import EndPoints
+from utils.item_value import ItemValue
+from utils.recipes import Recipes
 
 
 class OpenMarket:
@@ -10,23 +11,10 @@ class OpenMarket:
     CITY_OPTIONS = ['Thetford', 'Fort Sterling',
                     'Lymhurst', 'Martlock', 'Caerleon', 'Bridgewatch']
 
-    # Definir um método INIT que receba qual comida deve ser trabalhada
-
     @cached(cache=TTLCache(maxsize=3, ttl=900))
     def retrieve_data(self, url):
-        # endpoint z= f"{self.BASE_URL}/T7_MEAL_OMELETTE%402.json"
         endpoint = f"{self.BASE_URL}/{url}.json"
         return requests.get(endpoint).json()  # json --> Dicionário
-
-    def printPrices(self):
-        # Recuperando dados da API
-        city_dict = self.retrieve_data("T3_WHEAT")
-        # Printando cidades selecionadas em CITY_OPTIONS
-        for city_data in city_dict:
-            city = city_data['city']
-            price = city_data['sell_price_min']
-            if city in self.CITY_OPTIONS:
-                print(f"{city} is: {price: ,}".replace(',', '.'))
 
     def organize_data(self, data):
         list = [{"city": city['city'], "price": city['sell_price_min']}
@@ -34,70 +22,85 @@ class OpenMarket:
         sorted_list = sorted(list, key=lambda x: x['city'])
         return sorted_list
 
-    def omelette_t3(self):
-        # TIER 3 (Chicken Omelette)
-        omellete_t3 = EndPoints.RESOURCES["omelette_t3"]
-        sheaf_of_wheat = EndPoints.RESOURCES["sheaf_of_wheat"]
-        raw_chicken = EndPoints.RESOURCES["raw_chicken"]
-        hen_eggs = EndPoints.RESOURCES["hen_eggs"]
+    def all_foods(self, food_name):
+        # Food endpoints
+        ing_list, item_value_dict, recipe_dict, tier = self.food_endpoint(
+            food_name)
+        food_endpoint = food_name
+        food = EndPoints.RESOURCES[food_endpoint]
+        ing_endpoint_list = []
+        for ing in ing_list:
+            ing_endpoint_list.append(EndPoints.RESOURCES[ing])
+
         # Retrieving the data
-        omelette_t3_data = self.retrieve_data(omellete_t3)
-        wheat_data = self.retrieve_data(sheaf_of_wheat)
-        chicken_data = self.retrieve_data(raw_chicken)
-        hen_data = self.retrieve_data(hen_eggs)
+        food_data = self.retrieve_data(food)
+        ing_data_list = []
+        for ing in ing_endpoint_list:
+            ing_data_list.append(self.retrieve_data(ing))
+
         # Organazing the data
-        omellete_t3_prices = self.organize_data(omelette_t3_data)
-        wheat_prices = self.organize_data(wheat_data)
-        chicken_prices = self.organize_data(chicken_data)
-        hen_prices = self.organize_data(hen_data)
+        food_prices = self.organize_data(food_data)
+        ing_price_list = []
+        for ing in ing_data_list:
+            ing_price_list.append(self.organize_data(ing))
 
-        return omellete_t3_prices, wheat_prices, chicken_prices, hen_prices
+        return food_prices, ing_price_list, ing_list, item_value_dict, recipe_dict, tier
 
-    def omelette_t5(self):
-        # TIER 5 (Goose Omelette)
-        omelette_t5 = EndPoints.RESOURCES["omelette_t5"]
-        cabbage = EndPoints.RESOURCES["cabbage"]
-        raw_goose = EndPoints.RESOURCES["raw_goose"]
-        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
-        # Retrieving the data
-        omelette_t5_data = self.retrieve_data(omelette_t5)
-        cabbage_data = self.retrieve_data(cabbage)
-        goose_data = self.retrieve_data(raw_goose)
-        goose_eggs_data = self.retrieve_data(goose_eggs)
-        # Organazing the data
-        omellete_t5_prices = self.organize_data(omelette_t5_data)
-        cabbage_prices = self.organize_data(cabbage_data)
-        goose_prices = self.organize_data(goose_data)
-        goose_eggs_prices = self.organize_data(goose_eggs_data)
+    def food_endpoint(self, food_name):
+        _, tier_string = food_name.split("_")  # ['omelette', 't3']
+        tier = tier_string.upper()  # 'T3'
+        if 'omelette' in food_name:
+            item_value_dict = ItemValue.OMELETTE
+            recipe_dict = Recipes.OMELETTE
 
-        return omellete_t5_prices, cabbage_prices, goose_prices, goose_eggs_prices
+        elif 'stew' in food_name:
+            item_value_dict = ItemValue.STEW
+            recipe_dict = Recipes.STEW
 
-    def omelette_t7(self):
-        # TIER 7 (Pork Omelette)
-        omelette_t7 = EndPoints.RESOURCES["omelette_t7"]
-        corn = EndPoints.RESOURCES["bundle_of_corn"]
-        raw_pork = EndPoints.RESOURCES["raw_pork"]
-        goose_eggs = EndPoints.RESOURCES["goose_eggs"]
-        # Retrieving the data
-        omelette_t7_data = self.retrieve_data(omelette_t7)
-        corn_data = self.retrieve_data(corn)
-        pork_data = self.retrieve_data(raw_pork)
-        goose_eggs_data = self.retrieve_data(goose_eggs)
-        # Organazing the data
-        omellete_t7_prices = self.organize_data(omelette_t7_data)
-        corn_prices = self.organize_data(corn_data)
-        pork_prices = self.organize_data(pork_data)
-        goose_eggs_prices = self.organize_data(goose_eggs_data)
+        elif 'sandwich' in food_name:
+            item_value_dict = ItemValue.SANDWICH
+            recipe_dict = Recipes.SANDWICH
 
-        return omellete_t7_prices, corn_prices, pork_prices, goose_eggs_prices
+        elif 'roast' in food_name:
+            item_value_dict = ItemValue.ROAST
+            recipe_dict = Recipes.ROAST
 
-    '''
-    ANOTAÇÃO: CACHE
-        # maxsize=2 --> O CACHE irá guardar os argumentos da função e o que ela retorna.
-        Como a função 'retrieve_data' não possui argumentos, um maxsize=2 é suficiente.
-        Se ela possuísse argumentos, o maxsize teria de aumentar
+        elif 'pie' in food_name:
+            item_value_dict = ItemValue.PIE
+            recipe_dict = Recipes.PIE
 
-        # ttl = 900 --> Após quanto tempo de aplicação rodando será realizada uma ...
-        ... REQUEST ao servidor novamente para atualizar o valor no CACHE
-        Neste caso, após 900 segundos (15 minutos) será realizada uma REQUEST nova ao servidor.
-    '''
+        elif 'salad' in food_name:
+            item_value_dict = ItemValue.SALAD
+            recipe_dict = Recipes.SALAD
+
+        elif 'soup' in food_name:
+            item_value_dict = ItemValue.SOUP
+            recipe_dict = Recipes.SOUP
+
+        tag_list = list(recipe_dict[tier].keys())
+
+        return tag_list, item_value_dict, recipe_dict, tier
+
+
+'''
+ANOTAÇÃO:
+1) maxsize=2
+--> O CACHE irá guardar os argumentos da função e o que ela retorna.
+Como a função 'retrieve_data' não possui argumentos, um maxsize=2 é suficiente.
+Se ela possuísse argumentos, o maxsize teria de aumentar
+
+2) ttl = 900 -
+-> Após quanto tempo de aplicação rodando será realizada uma ...
+... REQUEST ao servidor novamente para atualizar o valor no CACHE. Neste caso,
+após 900 segundos (15 minutos) será realizada uma REQUEST nova ao servidor.
+
+3) URL BASE --> https://www.albion-online-data.com/api/v2/stats/Prices ...
+
+4)
+    Omelete .1 --> .../T7_MEAL_OMELETTE%401.json
+    Omelete .2 --> .../T7_MEAL_OMELETTE%402.json
+    Beef .1 --> .../T8_MEAL_STEW%401.json
+    Beef .2 --> .../T8_MEAL_STEW%402.json
+    Beef .3 --> .../T8_MEAL_STEW%403.json
+Exemplo: ENDPOINT = "https://www.albion-online-data.com/api/v2/stats/Prices/T7_MEAL_OMELETTE%402.json"
+'''
