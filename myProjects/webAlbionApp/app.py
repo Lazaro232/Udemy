@@ -1,68 +1,49 @@
-from libs.open_market import OpenMarket
-from utils.item_value import ItemValue
-from utils.recipes import Foods
-from utils.fees import Fees
-from math import floor
+from food import Food
+from flask import Flask, render_template, request, url_for, redirect
 
 
-# from cachetools import cached, TTLCache
-
-# URL BASE --> https://www.albion-online-data.com/api/v2/stats/Prices ...
-
-# Omelete .1 --> .../T7_MEAL_OMELETTE%401.json
-# Omelete .2 --> .../T7_MEAL_OMELETTE%402.json
-
-# Beef .1 --> .../T8_MEAL_STEW%401.json
-# Beef .2 --> .../T8_MEAL_STEW%402.json
-# Beef .3 --> .../T8_MEAL_STEW%403.json
-
-# Exemplo: ENDPOINT = "https://www.albion-online-data.com/api/v2/stats/Prices/T7_MEAL_OMELETTE%402.json"
-
-# Formula para taxa de uso: Custo/Item = Taxa * 5 * Valor do item (valor fixo)
-
-meal = OpenMarket()
+app = Flask(__name__)
 
 
-def omelette_t3():
-    # Albion informations
-    (omelette, wheat, chicken, hen) = meal.omelette_t3()
-    omelette_price = omelette[1]['price']
-    wheat_price = wheat[1]['price']
-    chicken_price = chicken[1]['price']
-    hen_price = hen[1]['price']
-
-    # User information
-    amount_to_craft = float(input('Quantidade a ser fabricada: '))
-    tax_fee = float(input('Taxa da loja a ser utilizada: '))/100
-    focus = int(input('1: Com foco --- 0: Sem foco '))
-
-    # Calculations
-    tax_to_craft = tax_fee * 5 * ItemValue.OMELETTE["T3"]
-
-    if focus:
-        return_rate = 0.453
-    else:
-        return_rate = 0.152
-
-    real_return_rate = 1 + return_rate + \
-        return_rate**2 + return_rate**3 + return_rate**4
-
-    amount_crafted = floor(amount_to_craft * real_return_rate / 10)*10
-    material_cost = amount_to_craft/10 * (wheat_price * Foods.OMELETTE['T3']['wheat'] +
-                                          chicken_price * Foods.OMELETTE['T3']['chicken'] +
-                                          hen_price * Foods.OMELETTE['T3']['hen'])
-    craft_cost = amount_crafted * tax_to_craft / 10
-    sell_cost = omelette_price * Fees.MARKET_FEE * amount_crafted
-    total_cost = material_cost + craft_cost + sell_cost
-
-    gross_profit = omelette_price * amount_crafted
-    result = gross_profit - total_cost
-    final_result = abs(floor(result))
-
-    if result < 0:
-        return "Prejuízo de {:,} pratas".format(final_result).replace(',', '.')
-    else:
-        return "Lucro de {:,} pratas".format(final_result).replace(',', '.')
+@app.route('/')
+def home():
+    return render_template('home.html')
 
 
-print(omelette_t3())
+@app.route('/result/<food_name>/<int:amount_to_craft>/<int:tax_fee>/<focus>',
+           methods=['GET', 'POST'])
+def meal(food_name, amount_to_craft, tax_fee, focus):
+    user_info = [amount_to_craft, tax_fee, focus]
+    food = Food()
+    food_type, tier = food_name.split("_")  # ['stew', 't4']
+    _, tier_number = tier.split("t")  # ['', '4']
+    food_type_title = food_type.title()  # 'Stew'
+
+    food_str = 'Tier ' + tier_number + ' ' + food_type_title
+
+    food_dict = food.all_foods(user_info, food_name)
+    return render_template('food_result.html',
+                           food=food_dict,
+                           food_name=food_str)
+
+
+@app.route('/form/<food_name>', methods=['GET', 'POST'])
+def form(food_name):
+    if request.method == 'POST':
+        amount_to_craft = request.form.get('quantity')
+        tax_fee = request.form.get('tax')
+        focus = request.form.get('focus')
+        if focus:
+            focus = 1
+        else:
+            focus = 0
+        return redirect(url_for('meal',
+                                food_name=food_name,
+                                amount_to_craft=amount_to_craft,
+                                tax_fee=tax_fee,
+                                focus=focus))
+    return render_template('craft_info.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
