@@ -16,11 +16,11 @@ class InfoUsuario():
     corpo_cor = 'verde real'
     porta_cor = 'verde real'
     puxador = 'puxadores 45'
-    complemento = 'tampo carvalho trevisso'
+    complemento = 'tampo'
     modelo = 'móvel'
 
     # ASSINATURA - PRIMEIRA LINHA
-    observacao = 'Alguma obs'
+    observacao = 'Hugo baleia'
     # ASSINATURA - SEGUNDA LINHA
     total_ambientes = '140750'
     # ASSINATURA - TERCEIRA LINHA

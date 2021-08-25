@@ -16,7 +16,7 @@ class PDF(FPDF):
         self.set_font('helvetica', 'B', 10)
         # Caixas
         self.cell(46, 36, border=1)
-        self.multi_cell(92, 6, 'HOME STUDIO MÓVEIS PLANEJADOS\nRua Júlio Siqueira 1008\nDionísio Torres, Fortaleza - CE\n@HOME.STUDIO21\nCONTATO@STUDIOUPINTERIORES.COM.BR\nContatos: 9.9775-7393 / 9.8694-1731 / 9.9198-7119',
+        self.multi_cell(92, 6, 'HOME MÓVEIS PLANEJADOS\nRua Júlio Siqueira 1008\nDionísio Torres, Fortaleza - CE\n@home.moveisprojetados\nCONTATO@STUDIOUPINTERIORES.COM.BR\nContatos: 9.9775-7393 / 9.8694-1731',
                         border=1, align='C')
         self.y = top
         self.x = offset
