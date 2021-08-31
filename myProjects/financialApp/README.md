@@ -7,7 +7,7 @@ This application helps the user to organize his investments. Using a Terminal in
 will create a Database to storage all the investments made. 
 
 Furthermore, the user can Add, Delete, Update, List all the investments of the Database, order the investments by value invested and create 
-an Excel file with the Database informations.
+an Excel file with the Database informations (the cells are locked).
 
 ## Python Setup
 
