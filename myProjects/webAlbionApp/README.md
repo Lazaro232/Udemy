@@ -24,7 +24,7 @@ will have profit crafting the desired food.
 
  * Open the local web page.
  
- * choose the food and fill the asked informations.
+ * Choose the food and fill the asked informations.
  
 
 ## :globe_with_meridians: Links and Email:
