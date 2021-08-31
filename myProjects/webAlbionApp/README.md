@@ -1,7 +1,7 @@
 # :pushpin: José Lázaro neto
  
 
-## :battery: Projects:
+## About the Project
 ### Below are the codes that I've made:
 
 * **Albion's API Request with Web Food Calculator** https://bit.ly/3BrxGwD
