@@ -8,13 +8,13 @@ Albion is a game where the economy is controled by the players. Therefore, Albio
 including resources prices. This application retrieve the data from the API and interact with the user using a web page, then calculate if the player
 will have profit crafting the desired food.
 
-## :dart: Python Developer
+## Python Setup
 
- * :mortar_board: Strong engineering professional with a Bachelor on Mechatronics Engineering (B.Eng.) from Instituto Federal de Educação, Ciência e Tecnologia do Ceará.
+ * This project use Flask framework to create a web page.
 
-* :books: I have completed an English course at FISK in Brazil.
+ * Request module is used to interact with the Albion's API and retrieve the resources prices.
 
-* :mag: Searching for new Python remote jobs.
+ * The application perform some calculations to return the result of crafting the user's chosen food.
 
 
 **Background in:** Python, Git, SQL, Flask and Applied Computational Intelligence.
