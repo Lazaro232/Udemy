@@ -22,7 +22,9 @@ will have profit crafting the desired food.
 
  * Run app.py file.
 
- * Open the local web page, choose the food and fill the asked informations.
+ * Open the local web page.
+ 
+ * choose the food and fill the asked informations.
  
 
 ## :globe_with_meridians: Links and Email:
