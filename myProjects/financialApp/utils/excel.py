@@ -1,14 +1,17 @@
-from openpyxl import Workbook, load_workbook
+import os
+from openpyxl import Workbook
 from openpyxl.styles.borders import Border
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Alignment, Font, PatternFill, Side, Protection
-from openpyxl.drawing.image import Image
 
 from utils import database
 
 
 class Excel:
     def __init__(self) -> None:
+        # Path
+        self.dir_path = os.path.dirname(os.path.realpath(__file__))
+        # Initial Setup
         self.THIN = Side(border_style="thin", color="000000")
         self.DOUBLE = Side(border_style="double", color="000000")
         self.ALIGNMENT = Alignment(horizontal="center", vertical="center")
@@ -18,16 +21,6 @@ class Excel:
         # Bloqueando a ABA e estabelecendo uma senha
         self.ws.protection.sheet = True
         self.ws.protection.password = '123'
-
-        # Inserindo Imagem
-        img = Image('image.jpg')
-        img.anchor = 'J1'
-        self.ws.add_image(img)
-
-        # row_number = 1
-        # col_idx = 10
-        # cell = self.ws.cell('J1')
-        # self.ws.add_image(img)
 
     def style_variables(self, row=0):
         # Cabeçalho Principal
@@ -56,7 +49,7 @@ class Excel:
         self.ws['A1'].protection = Protection(locked=False)
 
         # Cabeçalho secundário
-        header = ['ATIVO', 'Nº COTAS', 'VALOR/COTA', 'TOTAL', 'DATA']
+        header = ['ATIVO', 'COTAS', 'VALOR/COTA', 'TOTAL', 'DATA']
         self.ws.append(header)
         self.ws.merge_cells('C2:D2')
         self.ws.merge_cells('E2:F2')
@@ -106,5 +99,6 @@ class Excel:
             self.ws[char+'2'].alignment = self.ALIGNMENT
 
     def save_file(self):
-        self.wb.save(
-            "/mnt/c/wsl/pythonRoadMap/myProjects/financialApp/Investimentos_Teste.xlsx")
+        excel_path = self.dir_path.replace('utils', 'Investments.xlsx')
+        print(excel_path)
+        self.wb.save(excel_path)

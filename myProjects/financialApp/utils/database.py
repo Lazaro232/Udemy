@@ -1,9 +1,5 @@
 import sqlite3
 
-'''
-Arquivo que contém funções que interagem com o banco de dados
-'''
-
 
 def create_investment_table():
     connection = sqlite3.connect('data.db')

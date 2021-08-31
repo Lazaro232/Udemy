@@ -1,8 +1,5 @@
-from utils import app
+from utils import prompt
 
-'''
-Arquivo que contém o menu interativo com o usuário
-'''
 
 USER_CHOICE = """
 Enter:
@@ -17,17 +14,17 @@ Enter:
 Your choice: """
 
 user_option = {
-    "a": app.prompt_add_investment,       # Add
-    "l": app.list_all_investments,        # List
-    "o": app.organize_by_value_invested,  # Order
-    "d": app.prompt_delete_investment,    # Delete
-    "u": app.prompt_update_investment,    # Update
-    "e": app.create_excel_file,           # Excel
+    "a": prompt.prompt_add_investment,       # Add
+    "l": prompt.list_all_investments,        # List
+    "o": prompt.organize_by_value_invested,  # Order
+    "d": prompt.prompt_delete_investment,    # Delete
+    "u": prompt.prompt_update_investment,    # Update
+    "e": prompt.create_excel_file,           # Excel
 }
 
 
 def menu():
-    app.database.create_investment_table()
+    prompt.database.create_investment_table()
     user_input = input(USER_CHOICE)
     while user_input != 'q':
         if user_input in user_option:
@@ -38,4 +35,5 @@ def menu():
         user_input = input(USER_CHOICE)
 
 
-menu()
+if __name__ == '__main__':
+    menu()
