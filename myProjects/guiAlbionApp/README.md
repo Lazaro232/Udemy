@@ -11,7 +11,7 @@ will have profit crafting the desired food.
 
 ## Python Setup
 
- * This project use Tkinterframework to create a GUI to interact with the user.
+ * This project use Tkinter framework to create a GUI that interacts with the user.
 
  * Request module is used to interact with the Albion's API and retrieve the resources prices.
 
@@ -21,11 +21,11 @@ will have profit crafting the desired food.
 
  * Install the dependencies inside requirements.txt.
 
- * Run app.py file.
+ * Run food-calculator.py file.
 
- * Open the local web page.
+ * Fill the asked informations.
  
- * Choose the food and fill the asked informations.
+ * Choose the food.
  
 
 ## :globe_with_meridians: Links and Email:
