@@ -2,9 +2,8 @@
  
 
 ## About the Project
-### Albion Online API:
 
-Albion is a game where the economy is controled by the players. Therefore, Albion provides a API from wich you can retrieve all the data from the game, 
+Albion Online is a game where the economy is controled by the players. Therefore, Albion provides a API from wich you can retrieve all the data from the game, 
 including resources prices. This application retrieve the data from the API and interact with the user using a web page, then calculate if the player
 will have profit crafting the desired food.
 
