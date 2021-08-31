@@ -4,9 +4,9 @@
 ## About the Project
 ### Albion Online API:
 
-* **Albion's API Request with Web Food Calculator** https://bit.ly/3BrxGwD
-* **Albion's API Request with GUI Interface** https://bit.ly/3jvPj8o
- 
+Albion is a game where the economy is controled by the players. Therefore, Albion provides a API from wich you can retrieve all the data from the game, 
+including resources prices.
+
 ## :dart: Python Developer
 
  * :mortar_board: Strong engineering professional with a Bachelor on Mechatronics Engineering (B.Eng.) from Instituto Federal de Educação, Ciência e Tecnologia do Ceará.
