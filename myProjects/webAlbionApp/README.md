@@ -16,8 +16,13 @@ will have profit crafting the desired food.
 
  * The application perform some calculations to return the result of crafting the user's chosen food.
 
+## To Run the Application
 
-**Background in:** Python, Git, SQL, Flask and Applied Computational Intelligence.
+ * Install the dependencies inside requirements.txt.
+
+ * Run app.py file.
+
+ * Open the local web page, choose the food and fill the asked informations.
  
 
 ## :globe_with_meridians: Links and Email:
