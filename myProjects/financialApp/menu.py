@@ -1,8 +1,5 @@
 from utils import prompt
 
-'''
-Arquivo que contém o menu interativo com o usuário
-'''
 
 USER_CHOICE = """
 Enter:
@@ -38,4 +35,5 @@ def menu():
         user_input = input(USER_CHOICE)
 
 
-menu()
+if __name__ == '__main__':
+    menu()
