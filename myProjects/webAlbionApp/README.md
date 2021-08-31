@@ -16,7 +16,7 @@ will have profit crafting the desired food.
 
  * The application perform some calculations to return the result of crafting the user's chosen food.
 
-## To Run the Application
+## How To Run the Application
 
  * Install the dependencies inside requirements.txt.
 
