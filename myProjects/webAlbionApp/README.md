@@ -27,6 +27,7 @@ will have profit crafting the desired food.
  
 
 ## :globe_with_meridians: Links and Email:
+* 
 * :page_with_curl: Check out my [LinkedIn](https://www.linkedin.com/in/joselazaroneto232/)
 * :computer: How to reach me joselazaroneto97@gmail.com
 
