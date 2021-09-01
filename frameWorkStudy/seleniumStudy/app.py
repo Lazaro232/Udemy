@@ -6,16 +6,10 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions
+from webdriver_manager.chrome import ChromeDriverManager
 
-import time
 
-'''
-ESSE ARQUIVO DEVE SER EXECUTADO NO WINDOWS !!!
-MODIFICAR A PASTA DO chromedriver.exe !!!
-'''
-
-PATH = "C:/wsl/chromedriver.exe"
-driver = webdriver.Chrome(PATH)
+driver = webdriver.Chrome(ChromeDriverManager().install())
 
 driver.get("https://techwithtim.net")
 print(driver.title)  # Printa o título da página
