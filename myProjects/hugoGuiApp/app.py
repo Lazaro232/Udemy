@@ -1,11 +1,8 @@
-from tkinter import Tk, Checkbutton, DISABLED
-root = Tk()
+list = ['1', '2', '3']
 
 
-def click():
-    check.config(state=DISABLED)
+def kaka(a, b, c):
+    kaka(a, b, c)
 
 
-check = Checkbutton(text="Click Me", command=click)
-check.grid()
-root.mainloop()
+kaka(*list)
